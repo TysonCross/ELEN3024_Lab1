@@ -10,32 +10,27 @@
 clc; clear all; set(0,'ShowHiddenHandles','on'); delete(get(0,'Children'));
 
 %% Input
-% prompt = 'Enter a value for A_c: ';
-% A_c_value = input(prompt);
-% prompt = 'Enter a value for A_m: ';
-% A_m_value = input(prompt);
-A_c_value = 1;
-A_m_value = 1;
+prompt = 'Enter a value for message signal amplitude: ';
+A_m = input(prompt);
+prompt = 'Enter a value for carrier signal amplitude: ';
+A_c = input(prompt);
+% A_c = 1;
+% A_m = 1;
 
 %% Constants
 f_m = 10000.0;
 f_c = 1000000.0;
 T_m = 1/f_m;
 T_c = 1/f_c;
-x = 0.0:T_c/10:T_m;
+t = 0.0:T_c/10:2*T_m;
 
 %% Equations
-syms A_m A_c t;
-m(t) = A_m * cos(2 * sym(pi) * f_m * t);
-c(t) = A_c * cos(2 * sym(pi) * f_c * t);
-u(t) = m.*c;
+message = A_m * cos(2 * pi * f_m * t);
+carrier = A_c * cos(2 * pi * f_c * t);
+modulated_signal = message .* carrier;
 % Product to Sum:
-% u(t) = (A_c * A_m)/2 * (cos(2 * sym(pi) * (f_c - f_m) * t) ...
-%                     +   cos(2 * sym(pi) * (f_c + f_m) * t ) );
-
-message = double(subs(m, {A_c, A_m, t}, {A_c_value, A_m_value, x}));
-carrier = double(subs(c, {A_c, A_m, t}, {A_c_value, A_m_value, x}));
-modulated_signal = subs(u, {A_c, A_m, t}, {A_c_value, A_m_value, x});
+% modulated_signal = (A_c * A_m)/2 * (cos(2 * pi * (f_c - f_m) * t) ...
+%                     +   cos(2 * pi * (f_c + f_m) * t ) );
 
 % Display results
 % Exercise1b_Disp;
