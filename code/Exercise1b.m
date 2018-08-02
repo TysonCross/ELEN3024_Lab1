@@ -17,8 +17,8 @@ if (interactive)
     prompt = 'Enter a value for carrier signal amplitude: ';
     A_c = input(prompt);
 else
-    A_c = 1;
-    A_m = 1;
+    A_c = 1.0;
+    A_m = 1.0;
 end
 
 %% Constants
@@ -28,30 +28,29 @@ f_e = f_m;                                  %  envelope frequency in Hz
 T_m = 1/f_m;                                %  message period in seconds
 T_c = 1/f_c;                                %  carrier period in seconds
 T_e = T_m;                                  %  envelope period in seconds
-N = 4*f_m;                                  %  sampling rate
-time_step = T_c/10;                         %  time divisions
-freq_step = f_m/N;                          %  frequency divisions
-t = 0.0:time_step:2*T_m;                    %  time range
-f = linspace(-f_m/2,f_m/2,numel(t));        %  frequency range
+plot_length = 2*T_m;                        %  length of plot (x-axis)
+f_s = 4*f_c;                                %  sample / second (sample freq)
+dt = 1.0/f_s;                               %  seconds / sample (time-step)
+t = 0:dt:plot_length;                       %  time range
+N = numel(t);                               %  number of samples
+f = linspace(-f_s/2,f_s/2,N);               %  frequency range
 
 %% Equations
 message = A_m * cos(2 * pi * f_m * t);
 carrier = A_c * cos(2 * pi * f_c * t);
-message_frequency = abs(fftshift((fft(message))));
 
 % Double Sideband with Suppressed Carrier (DSB-SC):
 modulated_signal = message .* carrier;
-% Product to Sum:
-modulated_signal_sum = (A_c * A_m)/2 * (cos(2 * pi * (f_c - f_m) * t) ...
-                    +   cos(2 * pi * (f_c + f_m) * t ) );
+
 % Envelope:
 envelope1 = A_c * message;
 envelope2 = -envelope1;
-modulated_frequency = abs(fftshift((fft(modulated_signal))));
-% modulated_frequency = (A_c * A_m)/4 * ( dirac(f - f_c + f_m) ...
-%                                       + dirac(f + f_c - f_m) )...
-%                     + (A_c * A_m)/4 * ( dirac(f - f_c - f_m) ...
-%                                       + dirac(f + f_c + f_m) );
+
+% Frequency
+message_frequency = (2/N) * abs(fftshift((fft(message))));
+modulated_frequency = (2/N) * abs(fftshift((fft(modulated_signal))));
+f_message = [-f_m 0 f_m];
+f_output = [-f_c-f_m -f_c+f_m 0 f_c-f_m f_c+f_m];
 
 %% Display results
 Exercise1b_Disp;
