@@ -1,6 +1,6 @@
 % Display results
 disp(' ');
-disp(['Lab 1 - Exercise 1b ', num2str(N)]);
+disp(['Lab 1 - Exercise 1b ']);
 
 disp(' ');disp(' ');
 T1 = table ({'Message';'Carrier';'Envelope'},...

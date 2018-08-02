@@ -17,8 +17,8 @@ if (interactive)
     prompt = 'Enter a value for carrier signal amplitude: ';
     A_c = input(prompt);
 else
-    A_c = 1;
-    A_m = 1;
+    A_c = 1.0;
+    A_m = 1.0;
 end
 
 %% Constants
@@ -31,17 +31,18 @@ T_e = T_m;                                  %  envelope period in seconds
 plot_length = 2*T_m;                        %  length of plot (x-axis)
 
 % output message sampling
-mult = 2;                                   %   oversampling
+mult = 2;                                   %  oversampling
 f_s = mult*2*f_c;                           %  sample / second (sample freq)
 dt = 1.0/f_s;                               %  seconds / sample (time-step)
 t = 0:dt:plot_length;                       %  time range
 N = numel(t);                               %  number of samples
 f = linspace(-f_s/2,f_s/2,N);               %  frequency range
-a = [1,0.5,0.25];                                      %  modulation index
+a = [1,0.5,0.25];                           %  modulation index
 
 %% Equations
 
 % I'll move this to a function
+disp(['Lab 1']);
 for i=1:3
     message = A_m * cos(2 * pi * f_m * t);
     carrier = A_c * cos(2 * pi * f_c * t);
@@ -51,16 +52,17 @@ for i=1:3
     modulated_signal = (1+aMessage) .* carrier;
 
     % Envelope:
-    envelope1 = A_c * aMessage;
+    envelope1 = A_c * (1+ aMessage);
     envelope2 = -envelope1;
 
     % Frequency
     message_frequency = (mult/(2*N)) * abs(fftshift((fft(message))));
     modulated_frequency = (mult/(2*N)) * abs(fftshift((fft(modulated_signal))));
     f_message = [-f_m 0 f_m];
-    f_output = [-f_c-f_m -f_c -f_c+f_m 0 f_c-f_m f_c f_c+f_m];
+    f_output = [-f_c 0 f_c];
     
     % Display results
+    disp(['Exercise ', num2str(i+1)])
     Exercise2c_Disp;
 
     % Plot results
