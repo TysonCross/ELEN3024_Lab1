@@ -29,7 +29,10 @@ T_m = 1/f_m;                                %  message period in seconds
 T_c = 1/f_c;                                %  carrier period in seconds
 T_e = T_m;                                  %  envelope period in seconds
 plot_length = 2*T_m;                        %  length of plot (x-axis)
-f_s = 4*f_c;                                %  sample / second (sample freq)
+
+% output message sampling
+mult = 2;                                   %   oversampling
+f_s = mult*2*f_c;                           %  sample / second (sample freq)
 dt = 1.0/f_s;                               %  seconds / sample (time-step)
 t = 0:dt:plot_length;                       %  time range
 N = numel(t);                               %  number of samples
@@ -47,8 +50,8 @@ envelope1 = A_c * message;
 envelope2 = -envelope1;
 
 % Frequency
-message_frequency = (2/N) * abs(fftshift((fft(message))));
-modulated_frequency = (2/N) * abs(fftshift((fft(modulated_signal))));
+message_frequency = (mult/N) * abs(fftshift((fft(message))));
+modulated_frequency = (mult/N) * abs(fftshift((fft(modulated_signal))));
 f_message = [-f_m 0 f_m];
 f_output = [-f_c-f_m -f_c+f_m 0 f_c-f_m f_c+f_m];
 
