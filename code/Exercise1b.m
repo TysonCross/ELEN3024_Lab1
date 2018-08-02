@@ -50,8 +50,8 @@ envelope1 = A_c * message;
 envelope2 = -envelope1;
 
 % Frequency
-message_frequency = (mult/N) * abs(fftshift((fft(message))));
-modulated_frequency = (mult/N) * abs(fftshift((fft(modulated_signal))));
+message_frequency = (mult/(2*N)) * abs(fftshift((fft(message))));
+modulated_frequency = (mult/(2*N)) * abs(fftshift((fft(modulated_signal))));
 f_message = [-f_m 0 f_m];
 f_output = [-f_c-f_m -f_c+f_m 0 f_c-f_m f_c+f_m];
 
