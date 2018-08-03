@@ -43,7 +43,7 @@ a = [1,0.5,0.25];                           %  modulation index
 
 % I'll move this to a function
 disp(['Lab 1']);
-for i=1:3
+for i=3:-1:1
     message = A_m * cos(2 * pi * f_m * t);
     carrier = A_c * cos(2 * pi * f_c * t);
 
@@ -59,7 +59,7 @@ for i=1:3
     message_frequency = (mult/(2*N)) * abs(fftshift((fft(message))));
     modulated_frequency = (mult/(2*N)) * abs(fftshift((fft(modulated_signal))));
     f_message = [-f_m 0 f_m];
-    f_output = [-f_c 0 f_c];
+    f_output = [-f_c-f_m -f_c -f_c+f_m 0 f_c-f_m f_c f_c+f_m];
     
     % Display results
     disp(['Exercise ', num2str(i+1)])
