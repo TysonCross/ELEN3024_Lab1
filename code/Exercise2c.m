@@ -22,7 +22,7 @@ else
 end
 
 %% Constants
-f_m = 1000.0;                              %  message frequency in Hz
+f_m = 1000.0;                               %  message frequency in Hz
 f_c = 1000000.0;                            %  carrier frequency in Hz
 f_e = f_m;                                  %  envelope frequency in Hz
 T_m = 1/f_m;                                %  message period in seconds
@@ -31,8 +31,8 @@ T_e = T_m;                                  %  envelope period in seconds
 plot_length = 2*T_m;                        %  length of plot (x-axis)
 
 % output message sampling
-mult = 2;                                   %  oversampling
-f_s = mult*2*f_c;                           %  sample / second (sample freq)
+mult = 2*100;                               %  oversampling
+f_s = mult*f_c;                             %  sample / second (sample freq)
 dt = 1.0/f_s;                               %  seconds / sample (time-step)
 t = 0:dt:plot_length;                       %  time range
 N = numel(t);                               %  number of samples
@@ -56,8 +56,8 @@ for i=3:-1:1
     envelope2 = -envelope1;
 
     % Frequency
-    message_frequency = (mult/(2*N)) * abs(fftshift((fft(message))));
-    modulated_frequency = (mult/(2*N)) * abs(fftshift((fft(modulated_signal))));
+    message_frequency = (A_m/N)  * abs(fftshift((fft(message))));
+    modulated_frequency = (A_c*A_m/(2*N))  * abs(fftshift((fft(modulated_signal))));
     f_message = [-f_m 0 f_m];
     f_output = [-f_c-f_m -f_c -f_c+f_m 0 f_c-f_m f_c f_c+f_m];
     
