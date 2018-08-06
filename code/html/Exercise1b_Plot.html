@@ -1,0 +1,700 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Exercise1b_Plot</title><meta name="generator" content="MATLAB 9.4"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2018-08-06"><meta name="DC.source" content="Exercise1b_Plot.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1></h1><!--introduction--><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Display setting and output setup</a></li><li><a href="#2">Plot setup</a></li><li><a href="#3">Plot 1 (Message signal)</a></li><li><a href="#4">Plot 2 (Carrier signal)</a></li><li><a href="#5">Plot 3 (Modulated output)</a></li><li><a href="#6">Plot 4 (Message frequency spectrum)</a></li><li><a href="#7">Plot 5 (Modulated Signal frequency spectrum)</a></li></ul></div><h2 id="1">Display setting and output setup</h2><pre class="codeinput">scr = get(groot,<span class="string">'ScreenSize'</span>);                              <span class="comment">% screen resolution</span>
+phi = (1 + sqrt(5))/2;
+ratio = 1.5*phi/3;
+offset = [ scr(3)/8 scr(4)/8];
+fig1 =  figure(<span class="string">'Position'</span>,<span class="keyword">...</span><span class="comment">                               % draw figure</span>
+        [offset(1) offset(2) scr(3)*ratio scr(4)*ratio]);
+set(fig1,<span class="string">'numbertitle'</span>,<span class="string">'off'</span>,<span class="keyword">...</span><span class="comment">                            % Give figure useful title</span>
+        <span class="string">'name'</span>,<span class="string">'Lab 1 - Exercise 1b'</span>,<span class="keyword">...</span>
+        <span class="string">'Color'</span>,<span class="string">'white'</span>,<span class="keyword">...</span>
+        <span class="string">'Units'</span>,<span class="string">'normalized'</span>,<span class="keyword">...</span>
+        <span class="string">'visible'</span>,<span class="string">'off'</span>);
+fontName=<span class="string">'Helvetica'</span>;
+set(0,<span class="string">'defaultAxesFontName'</span>, fontName);                     <span class="comment">% Make fonts pretty</span>
+set(0,<span class="string">'defaultTextFontName'</span>, fontName);
+set(groot,<span class="string">'FixedWidthFontName'</span>, <span class="string">'ElroNet Monospace'</span>)
+
+nice_blue =     [ 0.180     0.180     0.900     0.6 ];
+nice_green =    [ 0.180     0.900     0.180     0.6 ];
+nice_cyan =     [ 0.180     0.900     0.900     0.6 ];
+nice_yellow =   [ 0.900     0.900     0.180     0.6 ];
+nice_red =      [ 0.900     0.180     0.180     0.6 ];
+pastel_blue =   [ 0.0000    0.4470    0.7410    0.8 ];
+trans_blue =    [ 0.0000    0.4470    0.7410    0.25 ];
+pastel_orange = [ 0.8500    0.3250    0.0980    0.8 ];
+pastel_yellow = [ 0.9290    0.6940    0.1250    0.8 ];
+pastel_purple = [ 0.4940    0.1840    0.5560    0.8 ];
+pastel_green =  [ 0.4660    0.6740    0.1880    0.8 ];
+sky_blue =      [ 0.3010    0.7450    0.9330    0.8 ];
+brick_red =     [ 0.6350    0.0780    0.1840    0.8 ];
+
+line_thin = 1;
+line_thick = 2;
+marker_size = 4;
+scale_y = 1.05;
+</pre><h2 id="2">Plot setup</h2><pre class="codeinput">subplot_row = 4;
+subplot_col = 2;
+subplot_entries = subplot_row*subplot_col;
+
+<span class="comment">% Legend</span>
+legend1 = legend(<span class="string">'hide'</span>);
+set(legend1,<span class="keyword">...</span>
+     <span class="string">'Position'</span>,[0.760680992230167 0.751042709291727 0.118343198475919 0.125105584825402],<span class="keyword">...</span>
+     <span class="string">'Box'</span>,<span class="string">'off'</span>);
+hold <span class="string">on</span>
+</pre><h2 id="3">Plot 1 (Message signal)</h2><pre class="codeinput">ax1 = subplot(subplot_row,subplot_col,[1 2]);
+hold <span class="string">on</span>;
+p1 = plot(t,message,<span class="keyword">...</span>
+    <span class="string">'Color'</span>,nice_red,<span class="keyword">...</span>
+	<span class="string">'LineWidth'</span>,line_thin,<span class="keyword">...</span>
+    <span class="string">'DisplayName'</span>,<span class="string">'m(t)'</span>);
+hold <span class="string">on</span>;
+
+<span class="comment">% Title and Annotations</span>
+t1 = title({strcat(<span class="string">"Message signal "</span>, p1.DisplayName), <span class="string">" "</span>});
+
+<span class="comment">% Axes and labels</span>
+ylabel(strcat(p1.DisplayName,<span class="string">' \rightarrow'</span>),<span class="keyword">...</span>
+    <span class="string">'FontName'</span>,fontName,<span class="keyword">...</span>
+    <span class="string">'FontSize'</span>,14);<span class="comment">%,...</span>
+xlabel({<span class="string">'t \rightarrow'</span>,<span class="string">'[seconds]'</span>},<span class="keyword">...</span>
+    <span class="string">'FontName'</span>,fontName,<span class="keyword">...</span>
+    <span class="string">'FontSize'</span>,14);
+
+y_lim_1 = [floor(min(message)) ceil(max(message))]*scale_y;
+x_lim_main = [0 t(end)]*1.05;
+set(ax1,<span class="keyword">...</span>
+    <span class="string">'Box'</span>,<span class="string">'off'</span>,<span class="keyword">...</span>
+    <span class="string">'XAxisLocation'</span>,<span class="string">'origin'</span>,<span class="keyword">...</span>
+    <span class="string">'YMinorTick'</span>,<span class="string">'off'</span>,<span class="keyword">...</span>
+    <span class="string">'XMinorTick'</span>,<span class="string">'off'</span>,<span class="keyword">...</span>
+    <span class="string">'TickDir'</span>,<span class="string">'both'</span>,<span class="keyword">...</span>
+    <span class="string">'TickLabelInterpreter'</span>,<span class="string">'tex'</span>,<span class="keyword">...</span>
+    <span class="string">'FontSize'</span>,12,<span class="keyword">...</span>
+    <span class="string">'XLim'</span>,x_lim_main,<span class="keyword">...</span>
+    <span class="string">'XTick'</span>,[0: t(end)/8 :t(end)],<span class="keyword">...</span>
+    <span class="string">'YLim'</span>,y_lim_1);
+ax1.XAxis.SecondaryLabel.Units=<span class="string">'normalized'</span>;
+ax1.XAxis.SecondaryLabel.Position = [0.972 0.35 0];
+ax1.Position = FillAxesPos(ax1,0.98);
+</pre><h2 id="4">Plot 2 (Carrier signal)</h2><pre class="codeinput">ax2 = subplot(subplot_row,subplot_col,[3 4]);
+hold <span class="string">on</span>;
+
+p2 = plot(t,carrier,<span class="keyword">...</span>
+    <span class="string">'Color'</span>,pastel_green,<span class="keyword">...</span>
+	<span class="string">'LineWidth'</span>,line_thin,<span class="keyword">...</span>
+    <span class="string">'DisplayName'</span>,<span class="string">'c(t)'</span>);
+hold <span class="string">on</span>;
+
+<span class="comment">% Title and Annotations</span>
+t2 = title({strcat(<span class="string">"Carrier signal "</span>, p2.DisplayName), <span class="string">" "</span>});
+
+<span class="comment">% Axes and labels</span>
+ylabel(strcat(p2.DisplayName,<span class="string">' \rightarrow'</span>),<span class="keyword">...</span>
+    <span class="string">'FontName'</span>,fontName,<span class="keyword">...</span>
+    <span class="string">'FontSize'</span>,14);
+xlabel({<span class="string">'t \rightarrow'</span>,<span class="string">'[seconds]'</span>},<span class="keyword">...</span>
+    <span class="string">'FontName'</span>,fontName,<span class="keyword">...</span>
+    <span class="string">'FontSize'</span>,14);
+
+y_lim_2 = [floor(min(carrier)) ceil(max(carrier))]*scale_y;
+<span class="comment">% x_lim_2 = [0 t(end)]*0.125;</span>
+
+set(ax2,<span class="keyword">...</span>
+    <span class="string">'FontSize'</span>,12,<span class="keyword">...</span>
+    <span class="string">'Box'</span>,<span class="string">'off'</span>,<span class="keyword">...</span>
+    <span class="string">'XAxisLocation'</span>,<span class="string">'origin'</span>,<span class="keyword">...</span>
+    <span class="string">'YMinorTick'</span>,<span class="string">'off'</span>,<span class="keyword">...</span>
+    <span class="string">'XMinorTick'</span>,<span class="string">'off'</span>,<span class="keyword">...</span>
+    <span class="string">'TickDir'</span>,<span class="string">'both'</span>,<span class="keyword">...</span>
+    <span class="string">'TickLabelInterpreter'</span>,<span class="string">'tex'</span>,<span class="keyword">...</span>
+    <span class="string">'XLim'</span>,x_lim_main,<span class="keyword">...</span>
+    <span class="string">'YLim'</span>,y_lim_2,<span class="keyword">...</span>
+    <span class="string">'XTick'</span>,[0: t(end)/8 :t(end)]);
+ax2.XAxis.SecondaryLabel.Units=<span class="string">'normalized'</span>;
+ax2.XAxis.SecondaryLabel.Position = [0.972 0.35 0];
+ax2.Position = FillAxesPos(ax2,0.98);
+</pre><h2 id="5">Plot 3 (Modulated output)</h2><pre class="codeinput">ax3 = subplot(subplot_row,subplot_col,[5 6]);
+hold <span class="string">on</span>;
+
+p3 = plot(t,modulated_signal,<span class="keyword">...</span>
+    <span class="string">'Color'</span>,pastel_blue,<span class="keyword">...</span>
+    <span class="string">'DisplayName'</span>,<span class="string">'u(t)'</span>,<span class="keyword">...</span>
+	<span class="string">'LineStyle'</span>,<span class="string">'-'</span>,<span class="keyword">...</span>
+	<span class="string">'LineWidth'</span>,line_thin);
+hold <span class="string">on</span>
+
+p3_a = plot(t,envelope1,<span class="keyword">...</span>
+    <span class="string">'Color'</span>,nice_red,<span class="keyword">...</span>
+    <span class="string">'DisplayName'</span>,<span class="string">'Upper envelope'</span>,<span class="keyword">...</span>
+	<span class="string">'LineStyle'</span>,<span class="string">'--'</span>,<span class="keyword">...</span>
+	<span class="string">'LineWidth'</span>,line_thick);
+hold <span class="string">on</span>
+
+p3_b = plot(t,envelope2,<span class="keyword">...</span>
+    <span class="string">'Color'</span>,pastel_green,<span class="keyword">...</span>
+    <span class="string">'DisplayName'</span>,<span class="string">'Lower envelope'</span>,<span class="keyword">...</span>
+	<span class="string">'LineStyle'</span>,<span class="string">'--'</span>,<span class="keyword">...</span>
+	<span class="string">'LineWidth'</span>,line_thick);
+hold <span class="string">on</span>
+
+<span class="comment">% Title and Annotations</span>
+t3 = title({strcat(<span class="string">"Output modulated Signal "</span>, p3.DisplayName); <span class="string">" "</span>});
+
+<span class="comment">% Legend</span>
+legend3 = legend(ax3,<span class="string">'show'</span>);
+set(legend3,<span class="keyword">...</span>
+	<span class="string">'Orientation'</span>,<span class="string">'horizontal'</span>,<span class="keyword">...</span>
+    <span class="string">'Location'</span>,<span class="string">'south'</span>,<span class="keyword">...</span>
+    <span class="string">'Position'</span>,[0.451867363539147 0.31579955563624 0.0956213779781067 0.01956745623069],<span class="keyword">...</span>
+	<span class="string">'Box'</span>,<span class="string">'off'</span>);
+hold <span class="string">on</span>
+
+<span class="comment">% Axes and labels</span>
+ylabel(strcat(p3.DisplayName,<span class="string">' \rightarrow'</span>),<span class="keyword">...</span>
+    <span class="string">'FontName'</span>,fontName,<span class="keyword">...</span>
+    <span class="string">'FontSize'</span>,14);
+xlabel({<span class="string">'t \rightarrow'</span>,<span class="string">'[seconds]'</span>},<span class="keyword">...</span>
+    <span class="string">'FontName'</span>,fontName,<span class="keyword">...</span>
+    <span class="string">'FontSize'</span>,14);
+
+y_lim_3 = [floor(min(modulated_signal)) ceil(max(modulated_signal))]*scale_y;
+x_lim_3 = [0 t(end)]*1.05;
+set(ax3,<span class="keyword">...</span>
+    <span class="string">'FontSize'</span>,12,<span class="keyword">...</span>
+    <span class="string">'Box'</span>,<span class="string">'off'</span>,<span class="keyword">...</span>
+    <span class="string">'XAxisLocation'</span>,<span class="string">'origin'</span>,<span class="keyword">...</span>
+    <span class="string">'YMinorTick'</span>,<span class="string">'off'</span>,<span class="keyword">...</span>
+    <span class="string">'XMinorTick'</span>,<span class="string">'off'</span>,<span class="keyword">...</span>
+    <span class="string">'TickDir'</span>,<span class="string">'both'</span>,<span class="keyword">...</span>
+    <span class="string">'TickLabelInterpreter'</span>,<span class="string">'tex'</span>,<span class="keyword">...</span>
+    <span class="string">'YLim'</span>,y_lim_3,<span class="keyword">...</span>
+    <span class="string">'XLim'</span>,x_lim_3,<span class="keyword">...</span>
+    <span class="string">'XTick'</span>,[0: t(end)/8 :t(end)]);
+ax3.XAxis.SecondaryLabel.Units=<span class="string">'normalized'</span>;
+ax3.XAxis.SecondaryLabel.Position = [0.972 0.35 0];
+ax3.Position = FillAxesPos(ax3,0.98);
+</pre><h2 id="6">Plot 4 (Message frequency spectrum)</h2><pre class="codeinput">ax4 = subplot(subplot_row,subplot_col,7);
+hold <span class="string">on</span>;
+
+p4 = stem(f,message_frequency,<span class="keyword">...</span>
+    <span class="string">'Color'</span>,nice_red,<span class="keyword">...</span>
+    <span class="string">'DisplayName'</span>,<span class="string">'|M(f)|'</span>,<span class="keyword">...</span>
+	<span class="string">'LineStyle'</span>,<span class="string">'-'</span>,<span class="keyword">...</span>
+	<span class="string">'LineWidth'</span>,line_thick,<span class="keyword">...</span>
+    <span class="string">'MarkerSize'</span>,0.01);
+hold <span class="string">on</span>
+
+
+<span class="comment">% Title and Annotations</span>
+t4 = title({strcat(<span class="string">"Message frequency "</span>, p4.DisplayName); <span class="string">" "</span>});
+
+a_4_1 = annotation(fig1,<span class="string">'textbox'</span>,<span class="keyword">...</span>
+    [0.146 0.02 0.014 0.0195],<span class="keyword">...</span>
+    <span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="keyword">...</span>
+    <span class="string">'String'</span>,{<span class="string">'-f_{m}'</span>},<span class="keyword">...</span>
+    <span class="string">'HorizontalAlignment'</span>,<span class="string">'center'</span>,<span class="keyword">...</span>
+    <span class="string">'FitBoxToText'</span>,<span class="string">'off'</span>,<span class="keyword">...</span>
+    <span class="string">'EdgeColor'</span>,<span class="string">'none'</span>);
+
+a_4_2 = annotation(fig1,<span class="string">'textbox'</span>,<span class="keyword">...</span>
+    [0.36459 0.02 0.014 0.0195],<span class="keyword">...</span>
+    <span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="keyword">...</span>
+    <span class="string">'String'</span>,{<span class="string">'f_{m}'</span>},<span class="keyword">...</span>
+    <span class="string">'HorizontalAlignment'</span>,<span class="string">'center'</span>,<span class="keyword">...</span>
+    <span class="string">'FitBoxToText'</span>,<span class="string">'off'</span>,<span class="keyword">...</span>
+    <span class="string">'EdgeColor'</span>,<span class="string">'none'</span>);
+
+<span class="comment">% Axes and labels</span>
+ylabel(p4.DisplayName,<span class="keyword">...</span>
+    <span class="string">'FontName'</span>,fontName,<span class="keyword">...</span>
+    <span class="string">'FontSize'</span>,14);
+xlabel({<span class="string">'f \rightarrow'</span>,<span class="string">'[Hz]'</span>},<span class="keyword">...</span>
+    <span class="string">'FontName'</span>,fontName,<span class="keyword">...</span>
+    <span class="string">'FontSize'</span>,14);
+
+y_lim_4 = [0 max(message_frequency)]*scale_y;
+x_lim_4 = [-f_m f_m]*1.5;
+set(ax4,<span class="keyword">...</span>
+    <span class="string">'Box'</span>,<span class="string">'off'</span>,<span class="keyword">...</span>
+    <span class="string">'XAxisLocation'</span>,<span class="string">'origin'</span>,<span class="keyword">...</span>
+    <span class="string">'YMinorTick'</span>,<span class="string">'off'</span>,<span class="keyword">...</span>
+    <span class="string">'XMinorTick'</span>,<span class="string">'off'</span>,<span class="keyword">...</span>
+    <span class="string">'TickDir'</span>,<span class="string">'both'</span>,<span class="keyword">...</span>
+    <span class="string">'TickLabelInterpreter'</span>,<span class="string">'tex'</span>,<span class="keyword">...</span>
+    <span class="string">'FontSize'</span>,12,<span class="keyword">...</span><span class="comment"> %'YLim',y_lim_4,...</span>
+    <span class="string">'XLim'</span>,x_lim_4*1.2,<span class="keyword">...</span>
+    <span class="string">'XTick'</span>,f_message);
+<span class="comment">% set(ax4,'YLim',y_lim_f_4);</span>
+ax4.XAxis.Label.Units=<span class="string">'normalized'</span>;
+ax4.XAxis.Label.Position = [0.98 0.25 0];
+ax4.XAxis.SecondaryLabel.Units=<span class="string">'normalized'</span>;
+ax4.XAxis.SecondaryLabel.Position = [0.999 -0.029 0];
+
+ax4.Position = FillAxesPos(ax4,1.1);
+</pre><h2 id="7">Plot 5 (Modulated Signal frequency spectrum)</h2><pre class="codeinput">ax5 = subplot(subplot_row,subplot_col,8);
+hold <span class="string">on</span>;
+
+p5 = stem(f,modulated_frequency,<span class="keyword">...</span>
+    <span class="string">'Color'</span>,pastel_blue,<span class="keyword">...</span>
+    <span class="string">'DisplayName'</span>,<span class="string">'|U(f)|'</span>,<span class="keyword">...</span>
+	<span class="string">'LineStyle'</span>,<span class="string">'-'</span>,<span class="keyword">...</span>
+	<span class="string">'LineWidth'</span>,line_thick,<span class="keyword">...</span>
+    <span class="string">'MarkerSize'</span>,0.01);
+hold <span class="string">on</span>
+
+<span class="comment">% Title and Annotations</span>
+t5 = title({strcat(<span class="string">"Output frequency "</span>, p5.DisplayName); <span class="string">" (only RHP shown) "</span>});
+
+a_5_1 = annotation(fig1,<span class="string">'textbox'</span>,<span class="keyword">...</span>
+    [0.683537025112685 0.02 0.014 0.0195],<span class="keyword">...</span>
+    <span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="keyword">...</span>
+    <span class="string">'String'</span>,{<span class="string">'f_{c}-f_{m}'</span>},<span class="keyword">...</span>
+    <span class="string">'HorizontalAlignment'</span>,<span class="string">'center'</span>,<span class="keyword">...</span>
+    <span class="string">'FitBoxToText'</span>,<span class="string">'off'</span>,<span class="keyword">...</span>
+    <span class="string">'EdgeColor'</span>,<span class="string">'none'</span>);
+
+
+a_5_2 = annotation(fig1,<span class="string">'textbox'</span>,<span class="keyword">...</span>
+    [0.7533 0.02 0.014 0.0195],<span class="keyword">...</span>
+    <span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="keyword">...</span>
+    <span class="string">'String'</span>,{<span class="string">'f_{c}+f_{m}'</span>},<span class="keyword">...</span>
+    <span class="string">'HorizontalAlignment'</span>,<span class="string">'center'</span>,<span class="keyword">...</span>
+    <span class="string">'FitBoxToText'</span>,<span class="string">'off'</span>,<span class="keyword">...</span>
+    <span class="string">'EdgeColor'</span>,<span class="string">'none'</span>);
+
+b_5_1 = annotation(fig1,<span class="string">'textbox'</span>,<span class="keyword">...</span>
+    [0.568795121922181 0.0581543327938797 0.0198027209129502 0.01956745623069],<span class="keyword">...</span>
+    <span class="string">'String'</span>,<span class="string">'...'</span>,<span class="keyword">...</span>
+    <span class="string">'LineStyle'</span>,<span class="string">'none'</span>,<span class="keyword">...</span>
+    <span class="string">'HorizontalAlignment'</span>,<span class="string">'center'</span>,<span class="keyword">...</span>
+    <span class="string">'FontSize'</span>,12,<span class="keyword">...</span>
+    <span class="string">'FitBoxToText'</span>,<span class="string">'off'</span>,<span class="keyword">...</span>
+    <span class="string">'EdgeColor'</span>,<span class="string">'none'</span>,<span class="keyword">...</span>
+    <span class="string">'BackgroundColor'</span>,[1 1 1]);
+
+<span class="comment">% Axes and labels</span>
+ylabel(p5.DisplayName,<span class="keyword">...</span>
+    <span class="string">'FontName'</span>,fontName,<span class="keyword">...</span>
+    <span class="string">'FontSize'</span>,14);
+xlabel({<span class="string">'f \rightarrow'</span>,<span class="string">'[Hz]'</span>},<span class="keyword">...</span>
+    <span class="string">'FontName'</span>,fontName,<span class="keyword">...</span>
+    <span class="string">'FontSize'</span>,14);
+
+y_lim_f_5 = [0 max(modulated_frequency)]*1.2;
+x_lim_5 = [-f_c-f_m f_c+f_m]*1.2;
+set(ax5,<span class="keyword">...</span>
+    <span class="string">'Box'</span>,<span class="string">'off'</span>,<span class="keyword">...</span>
+    <span class="string">'XAxisLocation'</span>,<span class="string">'origin'</span>,<span class="keyword">...</span>
+    <span class="string">'YMinorTick'</span>,<span class="string">'off'</span>,<span class="keyword">...</span>
+    <span class="string">'XMinorTick'</span>,<span class="string">'off'</span>,<span class="keyword">...</span>
+    <span class="string">'TickDir'</span>,<span class="string">'both'</span>,<span class="keyword">...</span>
+    <span class="string">'TickLabelInterpreter'</span>,<span class="string">'tex'</span>,<span class="keyword">...</span>
+    <span class="string">'FontSize'</span>,12,<span class="keyword">...</span>
+    <span class="string">'YAxisLocation'</span>,<span class="string">'origin'</span>,<span class="keyword">...</span>
+    <span class="string">'XLim'</span>,[floor((f_c-f_m)-(f_c-f_m)*0.05) floor((f_c+f_m)*1.05)],<span class="keyword">...</span>
+    <span class="string">'XTick'</span>,f_output(4:end));
+<span class="comment">% set(ax5,'YLim',y_lim_f_5);</span>
+ax5.XAxis.Label.Units=<span class="string">'normalized'</span>;
+ax5.XAxis.Label.Position = [0.98 0.25 0];
+ax5.XAxis.SecondaryLabel.Units=<span class="string">'normalized'</span>;
+ax5.XAxis.SecondaryLabel.Position = [0.999 -0.029 0];
+
+ax5.Position = FillAxesPos(ax5,1.1);
+
+hold <span class="string">off</span>
+
+set(fig1,<span class="string">'visible'</span>,<span class="string">'on'</span>);
+</pre><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%%% Display setting and output setup
+scr = get(groot,'ScreenSize');                              % screen resolution
+phi = (1 + sqrt(5))/2;
+ratio = 1.5*phi/3;
+offset = [ scr(3)/8 scr(4)/8]; 
+fig1 =  figure('Position',...                               % draw figure
+        [offset(1) offset(2) scr(3)*ratio scr(4)*ratio]);
+set(fig1,'numbertitle','off',...                            % Give figure useful title
+        'name','Lab 1 - Exercise 1b',...
+        'Color','white',...
+        'Units','normalized',...
+        'visible','off');
+fontName='Helvetica';
+set(0,'defaultAxesFontName', fontName);                     % Make fonts pretty
+set(0,'defaultTextFontName', fontName);
+set(groot,'FixedWidthFontName', 'ElroNet Monospace')  
+
+nice_blue =     [ 0.180     0.180     0.900     0.6 ];
+nice_green =    [ 0.180     0.900     0.180     0.6 ];
+nice_cyan =     [ 0.180     0.900     0.900     0.6 ];
+nice_yellow =   [ 0.900     0.900     0.180     0.6 ];
+nice_red =      [ 0.900     0.180     0.180     0.6 ];
+pastel_blue =   [ 0.0000    0.4470    0.7410    0.8 ];
+trans_blue =    [ 0.0000    0.4470    0.7410    0.25 ];
+pastel_orange = [ 0.8500    0.3250    0.0980    0.8 ];
+pastel_yellow = [ 0.9290    0.6940    0.1250    0.8 ];
+pastel_purple = [ 0.4940    0.1840    0.5560    0.8 ];
+pastel_green =  [ 0.4660    0.6740    0.1880    0.8 ];
+sky_blue =      [ 0.3010    0.7450    0.9330    0.8 ];
+brick_red =     [ 0.6350    0.0780    0.1840    0.8 ];
+                    
+line_thin = 1;
+line_thick = 2;
+marker_size = 4;
+scale_y = 1.05;
+
+%% Plot setup
+subplot_row = 4;
+subplot_col = 2;
+subplot_entries = subplot_row*subplot_col;
+
+% Legend
+legend1 = legend('hide');
+set(legend1,...
+     'Position',[0.760680992230167 0.751042709291727 0.118343198475919 0.125105584825402],...
+     'Box','off');
+hold on
+
+%% Plot 1 (Message signal)
+ax1 = subplot(subplot_row,subplot_col,[1 2]);
+hold on;
+p1 = plot(t,message,...
+    'Color',nice_red,...
+	'LineWidth',line_thin,...
+    'DisplayName','m(t)');
+hold on;
+
+% Title and Annotations
+t1 = title({strcat("Message signal ", p1.DisplayName), " "});
+
+% Axes and labels
+ylabel(strcat(p1.DisplayName,' \rightarrow'),...
+    'FontName',fontName,...
+    'FontSize',14);%,...
+xlabel({'t \rightarrow','[seconds]'},...
+    'FontName',fontName,...
+    'FontSize',14);
+
+y_lim_1 = [floor(min(message)) ceil(max(message))]*scale_y;
+x_lim_main = [0 t(end)]*1.05;
+set(ax1,...
+    'Box','off',...
+    'XAxisLocation','origin',...
+    'YMinorTick','off',...
+    'XMinorTick','off',...
+    'TickDir','both',...
+    'TickLabelInterpreter','tex',...
+    'FontSize',12,...
+    'XLim',x_lim_main,...
+    'XTick',[0: t(end)/8 :t(end)],...
+    'YLim',y_lim_1);
+ax1.XAxis.SecondaryLabel.Units='normalized';
+ax1.XAxis.SecondaryLabel.Position = [0.972 0.35 0];
+ax1.Position = FillAxesPos(ax1,0.98);
+
+%% Plot 2 (Carrier signal)
+ax2 = subplot(subplot_row,subplot_col,[3 4]);
+hold on;
+
+p2 = plot(t,carrier,...
+    'Color',pastel_green,...
+	'LineWidth',line_thin,...
+    'DisplayName','c(t)');
+hold on;
+
+% Title and Annotations
+t2 = title({strcat("Carrier signal ", p2.DisplayName), " "});
+
+% Axes and labels
+ylabel(strcat(p2.DisplayName,' \rightarrow'),...
+    'FontName',fontName,...
+    'FontSize',14);
+xlabel({'t \rightarrow','[seconds]'},...
+    'FontName',fontName,...
+    'FontSize',14);
+
+y_lim_2 = [floor(min(carrier)) ceil(max(carrier))]*scale_y;
+% x_lim_2 = [0 t(end)]*0.125;
+
+set(ax2,...
+    'FontSize',12,...
+    'Box','off',...
+    'XAxisLocation','origin',...
+    'YMinorTick','off',...
+    'XMinorTick','off',...
+    'TickDir','both',...
+    'TickLabelInterpreter','tex',...
+    'XLim',x_lim_main,...
+    'YLim',y_lim_2,...
+    'XTick',[0: t(end)/8 :t(end)]);
+ax2.XAxis.SecondaryLabel.Units='normalized';
+ax2.XAxis.SecondaryLabel.Position = [0.972 0.35 0];
+ax2.Position = FillAxesPos(ax2,0.98);
+
+%% Plot 3 (Modulated output)
+ax3 = subplot(subplot_row,subplot_col,[5 6]);
+hold on;
+
+p3 = plot(t,modulated_signal,...
+    'Color',pastel_blue,... 
+    'DisplayName','u(t)',...
+	'LineStyle','-',...
+	'LineWidth',line_thin);
+hold on
+
+p3_a = plot(t,envelope1,...
+    'Color',nice_red,... 
+    'DisplayName','Upper envelope',...
+	'LineStyle','REPLACE_WITH_DASH_DASH',...
+	'LineWidth',line_thick);
+hold on
+
+p3_b = plot(t,envelope2,...
+    'Color',pastel_green,... 
+    'DisplayName','Lower envelope',...
+	'LineStyle','REPLACE_WITH_DASH_DASH',...
+	'LineWidth',line_thick);
+hold on
+
+% Title and Annotations
+t3 = title({strcat("Output modulated Signal ", p3.DisplayName); " "});
+
+% Legend
+legend3 = legend(ax3,'show');
+set(legend3,...
+	'Orientation','horizontal',...
+    'Location','south',...
+    'Position',[0.451867363539147 0.31579955563624 0.0956213779781067 0.01956745623069],...
+	'Box','off');
+hold on
+
+% Axes and labels
+ylabel(strcat(p3.DisplayName,' \rightarrow'),...
+    'FontName',fontName,...
+    'FontSize',14);
+xlabel({'t \rightarrow','[seconds]'},...
+    'FontName',fontName,...
+    'FontSize',14);
+
+y_lim_3 = [floor(min(modulated_signal)) ceil(max(modulated_signal))]*scale_y;
+x_lim_3 = [0 t(end)]*1.05;
+set(ax3,...
+    'FontSize',12,...
+    'Box','off',...
+    'XAxisLocation','origin',...
+    'YMinorTick','off',...
+    'XMinorTick','off',...
+    'TickDir','both',...
+    'TickLabelInterpreter','tex',...
+    'YLim',y_lim_3,...
+    'XLim',x_lim_3,...
+    'XTick',[0: t(end)/8 :t(end)]);
+ax3.XAxis.SecondaryLabel.Units='normalized';
+ax3.XAxis.SecondaryLabel.Position = [0.972 0.35 0];
+ax3.Position = FillAxesPos(ax3,0.98);
+
+
+%% Plot 4 (Message frequency spectrum)
+ax4 = subplot(subplot_row,subplot_col,7);
+hold on;
+
+p4 = stem(f,message_frequency,...
+    'Color',nice_red,... 
+    'DisplayName','|M(f)|',...
+	'LineStyle','-',...
+	'LineWidth',line_thick,...
+    'MarkerSize',0.01);
+hold on
+
+
+% Title and Annotations
+t4 = title({strcat("Message frequency ", p4.DisplayName); " "});
+
+a_4_1 = annotation(fig1,'textbox',...
+    [0.146 0.02 0.014 0.0195],...
+    'FontWeight','bold',...
+    'String',{'-f_{m}'},...
+    'HorizontalAlignment','center',...
+    'FitBoxToText','off',...
+    'EdgeColor','none');
+
+a_4_2 = annotation(fig1,'textbox',...
+    [0.36459 0.02 0.014 0.0195],...
+    'FontWeight','bold',...
+    'String',{'f_{m}'},...
+    'HorizontalAlignment','center',...
+    'FitBoxToText','off',...
+    'EdgeColor','none');
+
+% Axes and labels
+ylabel(p4.DisplayName,...
+    'FontName',fontName,...
+    'FontSize',14);
+xlabel({'f \rightarrow','[Hz]'},...
+    'FontName',fontName,...
+    'FontSize',14);
+
+y_lim_4 = [0 max(message_frequency)]*scale_y;
+x_lim_4 = [-f_m f_m]*1.5;
+set(ax4,...
+    'Box','off',...
+    'XAxisLocation','origin',...
+    'YMinorTick','off',...
+    'XMinorTick','off',...
+    'TickDir','both',...
+    'TickLabelInterpreter','tex',...
+    'FontSize',12,... %'YLim',y_lim_4,...
+    'XLim',x_lim_4*1.2,...
+    'XTick',f_message);
+% set(ax4,'YLim',y_lim_f_4);
+ax4.XAxis.Label.Units='normalized';
+ax4.XAxis.Label.Position = [0.98 0.25 0];
+ax4.XAxis.SecondaryLabel.Units='normalized';
+ax4.XAxis.SecondaryLabel.Position = [0.999 -0.029 0];
+
+ax4.Position = FillAxesPos(ax4,1.1);
+
+%% Plot 5 (Modulated Signal frequency spectrum)
+ax5 = subplot(subplot_row,subplot_col,8);
+hold on;
+
+p5 = stem(f,modulated_frequency,...
+    'Color',pastel_blue,... 
+    'DisplayName','|U(f)|',...
+	'LineStyle','-',...
+	'LineWidth',line_thick,...
+    'MarkerSize',0.01);
+hold on
+
+% Title and Annotations
+t5 = title({strcat("Output frequency ", p5.DisplayName); " (only RHP shown) "});
+
+a_5_1 = annotation(fig1,'textbox',...
+    [0.683537025112685 0.02 0.014 0.0195],...
+    'FontWeight','bold',...
+    'String',{'f_{c}-f_{m}'},...
+    'HorizontalAlignment','center',...
+    'FitBoxToText','off',...
+    'EdgeColor','none');
+
+
+a_5_2 = annotation(fig1,'textbox',...
+    [0.7533 0.02 0.014 0.0195],...
+    'FontWeight','bold',...
+    'String',{'f_{c}+f_{m}'},...
+    'HorizontalAlignment','center',...
+    'FitBoxToText','off',...
+    'EdgeColor','none');
+
+b_5_1 = annotation(fig1,'textbox',...
+    [0.568795121922181 0.0581543327938797 0.0198027209129502 0.01956745623069],...
+    'String','...',...
+    'LineStyle','none',...
+    'HorizontalAlignment','center',...
+    'FontSize',12,...
+    'FitBoxToText','off',...
+    'EdgeColor','none',...
+    'BackgroundColor',[1 1 1]);
+
+% Axes and labels
+ylabel(p5.DisplayName,...
+    'FontName',fontName,...
+    'FontSize',14);
+xlabel({'f \rightarrow','[Hz]'},...
+    'FontName',fontName,...
+    'FontSize',14);
+
+y_lim_f_5 = [0 max(modulated_frequency)]*1.2;
+x_lim_5 = [-f_c-f_m f_c+f_m]*1.2;
+set(ax5,...
+    'Box','off',...
+    'XAxisLocation','origin',...
+    'YMinorTick','off',...
+    'XMinorTick','off',...
+    'TickDir','both',...
+    'TickLabelInterpreter','tex',...
+    'FontSize',12,...
+    'YAxisLocation','origin',...
+    'XLim',[floor((f_c-f_m)-(f_c-f_m)*0.05) floor((f_c+f_m)*1.05)],...
+    'XTick',f_output(4:end));
+% set(ax5,'YLim',y_lim_f_5);
+ax5.XAxis.Label.Units='normalized';
+ax5.XAxis.Label.Position = [0.98 0.25 0];
+ax5.XAxis.SecondaryLabel.Units='normalized';
+ax5.XAxis.SecondaryLabel.Position = [0.999 -0.029 0];
+
+ax5.Position = FillAxesPos(ax5,1.1);
+
+hold off
+
+set(fig1,'visible','on');
+##### SOURCE END #####
+--></body></html>

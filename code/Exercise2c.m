@@ -9,6 +9,7 @@
 
 clc; clear all; set(0,'ShowHiddenHandles','on'); delete(get(0,'Children'));
 interactive =0;
+export_on = 1;
 
 %% Input
 if (interactive)
@@ -31,7 +32,7 @@ T_e = T_m;                                  %  envelope period in seconds
 plot_length = 2*T_m;                        %  length of plot (x-axis)
 
 % output message sampling
-mult = 2*100;                               %  oversampling
+mult = 2*500;                               %  oversampling
 f_s = mult*f_c;                             %  sample / second (sample freq)
 dt = 1.0/f_s;                               %  seconds / sample (time-step)
 t = 0:dt:plot_length;                       %  time range
@@ -67,5 +68,20 @@ for i=3:-1:1
 
     % Plot results
     Exercise2c_Plot;
-end
+    
+    %% Export images
+    export_fig(sprintf('plot%d.png', a));
+    filename = ['../Report/images/Exercise2c_'];
+    if export_on
+        export_fig(sprintf('%s%d.eps', filename, i), '-eps');
+        export_fig(sprintf('%sC_%d.eps', filename, i),'-c[450,10,-310,10] ','-eps');
+        export_fig(sprintf('%sE_%d.eps', filename, i),'-c[700,70,-10,750] ','-eps');
+    end
 
+end
+    
+    if export_on
+        export_fig ../Report/images/Exercise2c_A.eps -c[30,10,-745,10] -eps;
+        export_fig ../Report/images/Exercise2c_B.eps -c[240,10,-542,10] -eps;
+        export_fig ../Report/images/Exercise2c_D.eps -c[700,820,-10,40] -eps;   
+    end

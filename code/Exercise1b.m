@@ -8,7 +8,8 @@
 %}
 
 clc; clear all; set(0,'ShowHiddenHandles','on'); delete(get(0,'Children'));
-interactive =0;
+interactive = 0;
+export_on = 1;
 
 %% Input
 if (interactive)
@@ -61,5 +62,12 @@ Exercise1b_Disp;
 %% Plot results
 Exercise1b_Plot;
 
-% export image
-% export_fig ('../Report/images/Exercise1b.eps',fig1)
+%% Export images
+if export_on
+    export_fig ../Report/images/Exercise1b.eps -eps ;
+    export_fig ../Report/images/Exercise1b_A.eps -c[30,10,-745,10] -eps ;
+    export_fig ../Report/images/Exercise1b_B.eps -c[240,10,-542,10] -eps ;
+    export_fig ../Report/images/Exercise1b_C.eps -c[450,10,-310,10] -eps ;
+    export_fig ../Report/images/Exercise1b_D.eps -c[700,820,-10,40] -eps ;
+    export_fig ../Report/images/Exercise1b_E.eps -c[700,70,-10,750] -eps ;
+end

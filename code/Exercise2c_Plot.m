@@ -151,7 +151,7 @@ p3_b = plot(t,envelope2,...
 hold on
 
 % Title and Annotations
-t3 = title({strcat("Output modulated Signal ", p3.DisplayName); " "});
+t3 = title({strcat("Output " , num2str(a(i)*100), '%', " modulated Signal ", p3.DisplayName); " "});
 
 % Legend
 legend3 = legend(ax3,'show');
@@ -261,7 +261,7 @@ p5 = stem(f,modulated_frequency,...
 hold on
 
 % Title and Annotations
-t5 = title({strcat("Output frequency ", p5.DisplayName); " (only RHP shown) "});
+t5 = title({strcat("Output frequency ", p5.DisplayName, " ", num2str(a(i)*100), '%', " modulated "); " (only RHP shown) "});
 
 a_5_1 = annotation(fig1,'textbox',...
     [0.664 0.02 0.014 0.0195],...
