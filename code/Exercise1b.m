@@ -3,13 +3,9 @@
 % Jason Parry 1046955
 % Rashaad Cassim 1099797
 
-%{
-    Notes and information
-%}
-
 clc; clear all; set(0,'ShowHiddenHandles','on'); delete(get(0,'Children'));
 interactive = 0;
-export_on = 1;
+export_on = 0;
 
 %% Input
 if (interactive)
@@ -55,9 +51,6 @@ message_frequency = (A_m/N)  * abs(fftshift((fft(message))));
 modulated_frequency = (A_c*A_m/N)  * abs(fftshift((fft(modulated_signal))));
 f_message = [-f_m 0 f_m];
 f_output = [-f_c-f_m -f_c+f_m 0 f_c-f_m f_c+f_m];
-
-%% Display results
-Exercise1b_Disp;
 
 %% Plot results
 Exercise1b_Plot;

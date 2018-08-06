@@ -3,13 +3,9 @@
 % Jason Parry 1046955
 % Rashaad Cassim 1099797
 
-%{
-    Notes and information
-%}
-
 clc; clear all; set(0,'ShowHiddenHandles','on'); delete(get(0,'Children'));
-interactive =0;
-export_on = 1;
+interactive = 0;
+export_on = 0;
 
 %% Input
 if (interactive)
@@ -41,14 +37,11 @@ f = linspace(-f_s/2,f_s/2,N);               %  frequency range
 a = [1,0.5,0.25];                           %  modulation index
 
 %% Equations
-
-% I'll move this to a function
-disp(['Lab 1']);
 for i=3:-1:1
     message = A_m * cos(2 * pi * f_m * t);
     carrier = A_c * cos(2 * pi * f_c * t);
-
     aMessage = a(i)*message;
+    
     % Double Sideband with Full Carrier (Conventional AM):
     modulated_signal = (1+aMessage) .* carrier;
 
@@ -61,10 +54,6 @@ for i=3:-1:1
     modulated_frequency = (A_c*A_m/(2*N))  * abs(fftshift((fft(modulated_signal))));
     f_message = [-f_m 0 f_m];
     f_output = [-f_c-f_m -f_c -f_c+f_m 0 f_c-f_m f_c f_c+f_m];
-    
-    % Display results
-    disp(['Exercise ', num2str(i+1)])
-    Exercise2c_Disp;
 
     % Plot results
     Exercise2c_Plot;
@@ -77,7 +66,6 @@ for i=3:-1:1
         export_fig(sprintf('%sC_%d.eps', filename, i),'-c[450,10,-310,10] ','-eps');
         export_fig(sprintf('%sE_%d.eps', filename, i),'-c[700,70,-10,750] ','-eps');
     end
-
 end
     
     if export_on

@@ -8,13 +8,14 @@ fig1 =  figure('Position',...                               % draw figure
 set(fig1,'numbertitle','off',...                            % Give figure useful title
         'name','Lab 1 - Exercise 2c',...
         'Color','white',...
-        'Units','normalized');
+        'Units','normalized',...
+        'visible','off');
 fontName='Helvetica';
 set(0,'defaultAxesFontName', fontName);                     % Make fonts pretty
 set(0,'defaultTextFontName', fontName);
 set(groot,'FixedWidthFontName', 'ElroNet Monospace')  
 
-%% Colors
+%% Colors and formatting
 nice_blue =     [ 0.180     0.180     0.900     0.6 ];
 nice_green =    [ 0.180     0.900     0.180     0.6 ];
 nice_cyan =     [ 0.180     0.900     0.900     0.6 ];
@@ -328,3 +329,4 @@ ax5.XAxis.SecondaryLabel.Position = [0.999 -0.029 0];
 ax5.Position = FillAxesPos(ax5,1.1);
 
 hold off;
+set(fig1,'visible','on');

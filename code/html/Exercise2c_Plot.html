@@ -66,7 +66,7 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 
 
 
-  </style></head><body><div class="content"><h1></h1><!--introduction--><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Display setting and output setup</a></li><li><a href="#2">Colors</a></li><li><a href="#3">Plot setup</a></li><li><a href="#4">Plot 1 (Message signal)</a></li><li><a href="#5">Plot 2 (Carrier signal)</a></li><li><a href="#6">Plot 3 (Modulated output)</a></li><li><a href="#7">Plot 4 (Message frequency spectrum)</a></li><li><a href="#8">Plot 5 (Modulated Signal frequency spectrum)</a></li></ul></div><h2 id="1">Display setting and output setup</h2><pre class="codeinput">scr = get(groot,<span class="string">'ScreenSize'</span>);                              <span class="comment">% screen resolution</span>
+  </style></head><body><div class="content"><h1></h1><!--introduction--><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Display setting and output setup</a></li><li><a href="#2">Colors and formatting</a></li><li><a href="#3">Plot setup</a></li><li><a href="#4">Plot 1 (Message signal)</a></li><li><a href="#5">Plot 2 (Carrier signal)</a></li><li><a href="#6">Plot 3 (Modulated output)</a></li><li><a href="#7">Plot 4 (Message frequency spectrum)</a></li><li><a href="#8">Plot 5 (Modulated Signal frequency spectrum)</a></li></ul></div><h2 id="1">Display setting and output setup</h2><pre class="codeinput">scr = get(groot,<span class="string">'ScreenSize'</span>);                              <span class="comment">% screen resolution</span>
 phi = (1 + sqrt(5))/2;
 ratio = 1.5*phi/3;
 offset = [ scr(3)/8 scr(4)/8];
@@ -75,12 +75,13 @@ fig1 =  figure(<span class="string">'Position'</span>,<span class="keyword">...<
 set(fig1,<span class="string">'numbertitle'</span>,<span class="string">'off'</span>,<span class="keyword">...</span><span class="comment">                            % Give figure useful title</span>
         <span class="string">'name'</span>,<span class="string">'Lab 1 - Exercise 2c'</span>,<span class="keyword">...</span>
         <span class="string">'Color'</span>,<span class="string">'white'</span>,<span class="keyword">...</span>
-        <span class="string">'Units'</span>,<span class="string">'normalized'</span>);
+        <span class="string">'Units'</span>,<span class="string">'normalized'</span>,<span class="keyword">...</span>
+        <span class="string">'visible'</span>,<span class="string">'off'</span>);
 fontName=<span class="string">'Helvetica'</span>;
 set(0,<span class="string">'defaultAxesFontName'</span>, fontName);                     <span class="comment">% Make fonts pretty</span>
 set(0,<span class="string">'defaultTextFontName'</span>, fontName);
 set(groot,<span class="string">'FixedWidthFontName'</span>, <span class="string">'ElroNet Monospace'</span>)
-</pre><h2 id="2">Colors</h2><pre class="codeinput">nice_blue =     [ 0.180     0.180     0.900     0.6 ];
+</pre><h2 id="2">Colors and formatting</h2><pre class="codeinput">nice_blue =     [ 0.180     0.180     0.900     0.6 ];
 nice_green =    [ 0.180     0.900     0.180     0.6 ];
 nice_cyan =     [ 0.180     0.900     0.900     0.6 ];
 nice_yellow =   [ 0.900     0.900     0.180     0.6 ];
@@ -379,6 +380,7 @@ ax5.XAxis.SecondaryLabel.Position = [0.999 -0.029 0];
 ax5.Position = FillAxesPos(ax5,1.1);
 
 hold <span class="string">off</span>;
+set(fig1,<span class="string">'visible'</span>,<span class="string">'on'</span>);
 </pre><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018a</a><br></p></div><!--
 ##### SOURCE BEGIN #####
 %%% Display setting and output setup
@@ -391,13 +393,14 @@ fig1 =  figure('Position',...                               % draw figure
 set(fig1,'numbertitle','off',...                            % Give figure useful title
         'name','Lab 1 - Exercise 2c',...
         'Color','white',...
-        'Units','normalized');
+        'Units','normalized',...
+        'visible','off');
 fontName='Helvetica';
 set(0,'defaultAxesFontName', fontName);                     % Make fonts pretty
 set(0,'defaultTextFontName', fontName);
 set(groot,'FixedWidthFontName', 'ElroNet Monospace')  
 
-%% Colors
+%% Colors and formatting
 nice_blue =     [ 0.180     0.180     0.900     0.6 ];
 nice_green =    [ 0.180     0.900     0.180     0.6 ];
 nice_cyan =     [ 0.180     0.900     0.900     0.6 ];
@@ -711,5 +714,6 @@ ax5.XAxis.SecondaryLabel.Position = [0.999 -0.029 0];
 ax5.Position = FillAxesPos(ax5,1.1);
 
 hold off;
+set(fig1,'visible','on');
 ##### SOURCE END #####
 --></body></html>

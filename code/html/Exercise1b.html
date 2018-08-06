@@ -66,18 +66,14 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 
 
 
-  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#2">Input</a></li><li><a href="#3">Constants</a></li><li><a href="#4">Equations</a></li><li><a href="#5">Display results</a></li><li><a href="#6">Plot results</a></li><li><a href="#7">Export images</a></li></ul></div><pre class="codeinput"><span class="comment">% ELEN3024 Lab 1 - Exercise 1b</span>
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#2">Input</a></li><li><a href="#3">Constants</a></li><li><a href="#4">Equations</a></li><li><a href="#5">Plot results</a></li><li><a href="#6">Export images</a></li></ul></div><pre class="codeinput"><span class="comment">% ELEN3024 Lab 1 - Exercise 1b</span>
 <span class="comment">% Tyson Cross 1239448</span>
 <span class="comment">% Jason Parry 1046955</span>
 <span class="comment">% Rashaad Cassim 1099797</span>
 
-<span class="comment">%{
-</span><span class="comment">    Notes and information
-</span><span class="comment">%}
-</span>
 clc; clear <span class="string">all</span>; set(0,<span class="string">'ShowHiddenHandles'</span>,<span class="string">'on'</span>); delete(get(0,<span class="string">'Children'</span>));
 interactive = 0;
-export_on = 1;
+export_on = 0;
 </pre><h2 id="2">Input</h2><pre class="codeinput"><span class="keyword">if</span> (interactive)
     prompt = <span class="string">'Enter a value for message signal amplitude: '</span>;
     A_m = input(prompt);
@@ -117,9 +113,8 @@ message_frequency = (A_m/N)  * abs(fftshift((fft(message))));
 modulated_frequency = (A_c*A_m/N)  * abs(fftshift((fft(modulated_signal))));
 f_message = [-f_m 0 f_m];
 f_output = [-f_c-f_m -f_c+f_m 0 f_c-f_m f_c+f_m];
-</pre><h2 id="5">Display results</h2><pre class="codeinput">Exercise1b_Disp;
-</pre><h2 id="6">Plot results</h2><pre class="codeinput">Exercise1b_Plot;
-</pre><h2 id="7">Export images</h2><pre class="codeinput"><span class="keyword">if</span> export_on
+</pre><h2 id="5">Plot results</h2><pre class="codeinput">Exercise1b_Plot;
+</pre><h2 id="6">Export images</h2><pre class="codeinput"><span class="keyword">if</span> export_on
     export_fig <span class="string">../Report/images/Exercise1b.eps</span> <span class="string">-eps</span> ;
     export_fig <span class="string">../Report/images/Exercise1b_A.eps</span> <span class="string">-c[30,10,-745,10]</span> <span class="string">-eps</span> ;
     export_fig <span class="string">../Report/images/Exercise1b_B.eps</span> <span class="string">-c[240,10,-542,10]</span> <span class="string">-eps</span> ;
@@ -134,13 +129,9 @@ f_output = [-f_c-f_m -f_c+f_m 0 f_c-f_m f_c+f_m];
 % Jason Parry 1046955
 % Rashaad Cassim 1099797
 
-%{
-    Notes and information
-%}
-
 clc; clear all; set(0,'ShowHiddenHandles','on'); delete(get(0,'Children'));
 interactive = 0;
-export_on = 1;
+export_on = 0;
 
 %% Input
 if (interactive)
@@ -186,9 +177,6 @@ message_frequency = (A_m/N)  * abs(fftshift((fft(message))));
 modulated_frequency = (A_c*A_m/N)  * abs(fftshift((fft(modulated_signal))));
 f_message = [-f_m 0 f_m];
 f_output = [-f_c-f_m -f_c+f_m 0 f_c-f_m f_c+f_m];
-
-%% Display results
-Exercise1b_Disp;
 
 %% Plot results
 Exercise1b_Plot;
