@@ -62,14 +62,14 @@ for i=3:-1:1
     export_fig(sprintf('plot%d.png', a));
     filename = ['../Report/images/Exercise2c_'];
     if export_on
-        export_fig(sprintf('%s%d.eps', filename, i), '-eps');
-        export_fig(sprintf('%sC_%d.eps', filename, i),'-c[450,10,-310,10] ','-eps');
-        export_fig(sprintf('%sE_%d.eps', filename, i),'-c[700,70,-10,750] ','-eps');
+%         export_fig(sprintf('%s%d.eps', filename, i), '-eps');
+        export_fig(sprintf('%sC_%d.eps', filename, i),'-c[475,10,-310,10] ','-eps');
+        export_fig(sprintf('%sE_%d.eps', filename, i),'-c[735,70,-10,750] ','-eps');
     end
 end
     
     if export_on
-        export_fig ../Report/images/Exercise2c_A.eps -c[30,10,-745,10] -eps;
-        export_fig ../Report/images/Exercise2c_B.eps -c[240,10,-542,10] -eps;
-        export_fig ../Report/images/Exercise2c_D.eps -c[700,820,-10,40] -eps;   
+        export_fig ../Report/images/Exercise2c_A.eps -c[50,10,-745,10] -eps;
+        export_fig ../Report/images/Exercise2c_B.eps -c[265,10,-542,10] -eps;
+        export_fig ../Report/images/Exercise2c_D.eps -c[735,820,-10,40] -eps;   
     end

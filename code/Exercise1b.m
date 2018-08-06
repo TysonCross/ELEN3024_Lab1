@@ -57,10 +57,10 @@ Exercise1b_Plot;
 
 %% Export images
 if export_on
-    export_fig ../Report/images/Exercise1b.eps -eps ;
-    export_fig ../Report/images/Exercise1b_A.eps -c[30,10,-745,10] -eps ;
-    export_fig ../Report/images/Exercise1b_B.eps -c[240,10,-542,10] -eps ;
-    export_fig ../Report/images/Exercise1b_C.eps -c[450,10,-310,10] -eps ;
-    export_fig ../Report/images/Exercise1b_D.eps -c[700,820,-10,40] -eps ;
-    export_fig ../Report/images/Exercise1b_E.eps -c[700,70,-10,750] -eps ;
+%     export_fig ../Report/images/Exercise1b.eps -eps ;
+    export_fig ../Report/images/Exercise1b_A.eps -c[50,10,-745,10] -eps ;
+    export_fig ../Report/images/Exercise1b_B.eps -c[265,10,-542,10] -eps ;
+    export_fig ../Report/images/Exercise1b_C.eps -c[475,10,-310,10] -eps ;
+    export_fig ../Report/images/Exercise1b_D.eps -c[735,820,-10,40] -eps ;
+    export_fig ../Report/images/Exercise1b_E.eps -c[735,70,-10,750] -eps ;
 end
