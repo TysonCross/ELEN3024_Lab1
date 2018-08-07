@@ -1,8 +1,9 @@
-% ELEN3024 Lab 1 - Exercise 2c
-% Tyson Cross 1239448
-% Jason Parry 1046955
-% Rashaad Cassim 1099797
-
+%%% ELEN3024 Lab 1 - Exercise 2c / 3 / 4
+%{ 
+    Tyson Cross 1239448
+    Jason Parry 1046955
+    Rashaad Cassim 1099797
+%}
 clc; clear all; set(0,'ShowHiddenHandles','on'); delete(get(0,'Children'));
 interactive = 0;
 export_on = 0;

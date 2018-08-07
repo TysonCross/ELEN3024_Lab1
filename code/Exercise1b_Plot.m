@@ -1,4 +1,10 @@
-%%% Display setting and output setup
+%%% ELEN3024 Lab 1 - Plotting script
+%{ 
+    Tyson Cross 1239448
+    Jason Parry 1046955
+    Rashaad Cassim 1099797
+%}
+%% Display setting and output setup
 scr = get(groot,'ScreenSize');                              % screen resolution
 phi = (1 + sqrt(5))/2;
 ratio = 1.5*phi/3;

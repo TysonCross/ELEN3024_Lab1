@@ -6,7 +6,7 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Exercise2c_Plot</title><meta name="generator" content="MATLAB 9.4"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2018-08-06"><meta name="DC.source" content="Exercise2c_Plot.m"><style type="text/css">
+      --><title>Exercise2c_Plot</title><meta name="generator" content="MATLAB 9.4"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2018-08-07"><meta name="DC.source" content="Exercise2c_Plot.m"><style type="text/css">
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 html { min-height:100%; margin-bottom:1px; }
@@ -66,7 +66,12 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 
 
 
-  </style></head><body><div class="content"><h1></h1><!--introduction--><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Display setting and output setup</a></li><li><a href="#2">Colors and formatting</a></li><li><a href="#3">Plot setup</a></li><li><a href="#4">Plot 1 (Message signal)</a></li><li><a href="#5">Plot 2 (Carrier signal)</a></li><li><a href="#6">Plot 3 (Modulated output)</a></li><li><a href="#7">Plot 4 (Message frequency spectrum)</a></li><li><a href="#8">Plot 5 (Modulated Signal frequency spectrum)</a></li></ul></div><h2 id="1">Display setting and output setup</h2><pre class="codeinput">scr = get(groot,<span class="string">'ScreenSize'</span>);                              <span class="comment">% screen resolution</span>
+  </style></head><body><div class="content"><h1></h1><!--introduction--><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">ELEN3024 Lab 1 - Exercise 2/3/4 plotting script</a></li><li><a href="#2">Display setting and output setup</a></li><li><a href="#3">Colors and formatting</a></li><li><a href="#4">Plot setup</a></li><li><a href="#5">Plot 1 (Message signal)</a></li><li><a href="#6">Plot 2 (Carrier signal)</a></li><li><a href="#7">Plot 3 (Modulated output)</a></li><li><a href="#8">Plot 4 (Message frequency spectrum)</a></li><li><a href="#9">Plot 5 (Modulated Signal frequency spectrum)</a></li></ul></div><h2 id="1">ELEN3024 Lab 1 - Exercise 2/3/4 plotting script</h2><pre class="codeinput"><span class="comment">%{
+</span><span class="comment">    Tyson Cross 1239448
+</span><span class="comment">    Jason Parry 1046955
+</span><span class="comment">    Rashaad Cassim 1099797
+</span><span class="comment">%}</span>
+</pre><h2 id="2">Display setting and output setup</h2><pre class="codeinput">scr = get(groot,<span class="string">'ScreenSize'</span>);                              <span class="comment">% screen resolution</span>
 phi = (1 + sqrt(5))/2;
 ratio = 1.5*phi/3;
 offset = [ scr(3)/8 scr(4)/8];
@@ -81,7 +86,7 @@ fontName=<span class="string">'Helvetica'</span>;
 set(0,<span class="string">'defaultAxesFontName'</span>, fontName);                     <span class="comment">% Make fonts pretty</span>
 set(0,<span class="string">'defaultTextFontName'</span>, fontName);
 set(groot,<span class="string">'FixedWidthFontName'</span>, <span class="string">'ElroNet Monospace'</span>)
-</pre><h2 id="2">Colors and formatting</h2><pre class="codeinput">nice_blue =     [ 0.180     0.180     0.900     0.6 ];
+</pre><h2 id="3">Colors and formatting</h2><pre class="codeinput">nice_blue =     [ 0.180     0.180     0.900     0.6 ];
 nice_green =    [ 0.180     0.900     0.180     0.6 ];
 nice_cyan =     [ 0.180     0.900     0.900     0.6 ];
 nice_yellow =   [ 0.900     0.900     0.180     0.6 ];
@@ -99,7 +104,7 @@ line_thin = 1;
 line_thick = 2;
 marker_size = 4;
 scale_y = 1.05;
-</pre><h2 id="3">Plot setup</h2><pre class="codeinput">subplot_row = 4;
+</pre><h2 id="4">Plot setup</h2><pre class="codeinput">subplot_row = 4;
 subplot_col = 2;
 subplot_entries = subplot_row*subplot_col;
 
@@ -109,7 +114,7 @@ set(legend1,<span class="keyword">...</span>
      <span class="string">'Position'</span>,[0.760680992230167 0.751042709291727 0.118343198475919 0.125105584825402],<span class="keyword">...</span>
      <span class="string">'Box'</span>,<span class="string">'off'</span>);
 hold <span class="string">on</span>
-</pre><h2 id="4">Plot 1 (Message signal)</h2><pre class="codeinput">ax1 = subplot(subplot_row,subplot_col,[1 2]);
+</pre><h2 id="5">Plot 1 (Message signal)</h2><pre class="codeinput">ax1 = subplot(subplot_row,subplot_col,[1 2]);
 hold <span class="string">on</span>;
 p1 = plot(t,message,<span class="keyword">...</span>
     <span class="string">'Color'</span>,nice_red,<span class="keyword">...</span>
@@ -144,7 +149,7 @@ set(ax1,<span class="keyword">...</span>
 ax1.XAxis.SecondaryLabel.Units=<span class="string">'normalized'</span>;
 ax1.XAxis.SecondaryLabel.Position = [0.972 0.35 0];
 ax1.Position = FillAxesPos(ax1,0.98);
-</pre><h2 id="5">Plot 2 (Carrier signal)</h2><pre class="codeinput">ax2 = subplot(subplot_row,subplot_col,[3 4]);
+</pre><h2 id="6">Plot 2 (Carrier signal)</h2><pre class="codeinput">ax2 = subplot(subplot_row,subplot_col,[3 4]);
 hold <span class="string">on</span>;
 
 p2 = plot(t(1:end/20),carrier(1:end/20),<span class="keyword">...</span>
@@ -183,7 +188,7 @@ set(ax2,<span class="keyword">...</span>
 ax2.XAxis.SecondaryLabel.Units=<span class="string">'normalized'</span>;
 ax2.XAxis.SecondaryLabel.Position = [0.972 0.35 0];
 ax2.Position = FillAxesPos(ax2,0.98);
-</pre><h2 id="6">Plot 3 (Modulated output)</h2><pre class="codeinput">ax3 = subplot(subplot_row,subplot_col,[5 6]);
+</pre><h2 id="7">Plot 3 (Modulated output)</h2><pre class="codeinput">ax3 = subplot(subplot_row,subplot_col,[5 6]);
 hold <span class="string">on</span>;
 
 p3 = plot(t,modulated_signal,<span class="keyword">...</span>
@@ -243,7 +248,7 @@ set(ax3,<span class="keyword">...</span>
 ax3.XAxis.SecondaryLabel.Units=<span class="string">'normalized'</span>;
 ax3.XAxis.SecondaryLabel.Position = [0.972 0.35 0];
 ax3.Position = FillAxesPos(ax3,0.98);
-</pre><h2 id="7">Plot 4 (Message frequency spectrum)</h2><pre class="codeinput">ax4 = subplot(subplot_row,subplot_col,7);
+</pre><h2 id="8">Plot 4 (Message frequency spectrum)</h2><pre class="codeinput">ax4 = subplot(subplot_row,subplot_col,7);
 hold <span class="string">on</span>;
 
 p4 = stem(f,message_frequency,<span class="keyword">...</span>
@@ -301,7 +306,7 @@ ax4.XAxis.SecondaryLabel.Units=<span class="string">'normalized'</span>;
 ax4.XAxis.SecondaryLabel.Position = [0.999 -0.029 0];
 
 ax4.Position = FillAxesPos(ax4,1.1);
-</pre><h2 id="8">Plot 5 (Modulated Signal frequency spectrum)</h2><pre class="codeinput">ax5 = subplot(subplot_row,subplot_col,8);
+</pre><h2 id="9">Plot 5 (Modulated Signal frequency spectrum)</h2><pre class="codeinput">ax5 = subplot(subplot_row,subplot_col,8);
 hold <span class="string">on</span>;
 
 p5 = stem(f,modulated_frequency,<span class="keyword">...</span>
@@ -313,7 +318,7 @@ p5 = stem(f,modulated_frequency,<span class="keyword">...</span>
 hold <span class="string">on</span>
 
 <span class="comment">% Title and Annotations</span>
-t5 = title({strcat(<span class="string">"Output frequency "</span>, p5.DisplayName, <span class="string">" "</span>, num2str(a(i)*100), <span class="string">'%'</span>, <span class="string">" modulated "</span>); <span class="string">" (only RHP shown) "</span>});
+t5 = title({strcat(<span class="string">"Output frequency "</span>, p5.DisplayName, <span class="string">" "</span>, num2str(a(i)*100), <span class="string">'%'</span>, <span class="string">" modulated "</span>); <span class="string">" "</span>});
 
 a_5_1 = annotation(fig1,<span class="string">'textbox'</span>,<span class="keyword">...</span>
     [0.664 0.02 0.014 0.0195],<span class="keyword">...</span>
@@ -383,7 +388,14 @@ hold <span class="string">off</span>;
 set(fig1,<span class="string">'visible'</span>,<span class="string">'on'</span>);
 </pre><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018a</a><br></p></div><!--
 ##### SOURCE BEGIN #####
-%%% Display setting and output setup
+%%% ELEN3024 Lab 1 - Exercise 2/3/4 plotting script
+%{ 
+    Tyson Cross 1239448
+    Jason Parry 1046955
+    Rashaad Cassim 1099797
+%}
+
+%% Display setting and output setup
 scr = get(groot,'ScreenSize');                              % screen resolution
 phi = (1 + sqrt(5))/2;
 ratio = 1.5*phi/3;
@@ -647,7 +659,7 @@ p5 = stem(f,modulated_frequency,...
 hold on
 
 % Title and Annotations
-t5 = title({strcat("Output frequency ", p5.DisplayName, " ", num2str(a(i)*100), '%', " modulated "); " (only RHP shown) "});
+t5 = title({strcat("Output frequency ", p5.DisplayName, " ", num2str(a(i)*100), '%', " modulated "); " "});
 
 a_5_1 = annotation(fig1,'textbox',...
     [0.664 0.02 0.014 0.0195],...

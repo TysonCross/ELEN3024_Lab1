@@ -6,7 +6,7 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Exercise2c</title><meta name="generator" content="MATLAB 9.4"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2018-08-06"><meta name="DC.source" content="Exercise2c.m"><style type="text/css">
+      --><title>Exercise2c</title><meta name="generator" content="MATLAB 9.4"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2018-08-07"><meta name="DC.source" content="Exercise2c.m"><style type="text/css">
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 html { min-height:100%; margin-bottom:1px; }
@@ -66,12 +66,12 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 
 
 
-  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#2">Input</a></li><li><a href="#3">Constants</a></li><li><a href="#4">Equations</a></li><li><a href="#6">Export images</a></li></ul></div><pre class="codeinput"><span class="comment">% ELEN3024 Lab 1 - Exercise 2c</span>
-<span class="comment">% Tyson Cross 1239448</span>
-<span class="comment">% Jason Parry 1046955</span>
-<span class="comment">% Rashaad Cassim 1099797</span>
-
-clc; clear <span class="string">all</span>; set(0,<span class="string">'ShowHiddenHandles'</span>,<span class="string">'on'</span>); delete(get(0,<span class="string">'Children'</span>));
+  </style></head><body><div class="content"><h1></h1><!--introduction--><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">ELEN3024 Lab 1 - Exercise 2c / 3 / 4</a></li><li><a href="#2">Input</a></li><li><a href="#3">Constants</a></li><li><a href="#4">Equations</a></li><li><a href="#6">Export images</a></li></ul></div><h2 id="1">ELEN3024 Lab 1 - Exercise 2c / 3 / 4</h2><pre class="codeinput"><span class="comment">%{
+</span><span class="comment">    Tyson Cross 1239448
+</span><span class="comment">    Jason Parry 1046955
+</span><span class="comment">    Rashaad Cassim 1099797
+</span><span class="comment">%}
+</span>clc; clear <span class="string">all</span>; set(0,<span class="string">'ShowHiddenHandles'</span>,<span class="string">'on'</span>); delete(get(0,<span class="string">'Children'</span>));
 interactive = 0;
 export_on = 0;
 </pre><h2 id="2">Input</h2><pre class="codeinput"><span class="keyword">if</span> (interactive)
@@ -122,24 +122,25 @@ a = [1,0.5,0.25];                           <span class="comment">%  modulation 
 </pre><h2 id="6">Export images</h2><pre class="codeinput">    export_fig(sprintf(<span class="string">'plot%d.png'</span>, a));
     filename = [<span class="string">'../Report/images/Exercise2c_'</span>];
     <span class="keyword">if</span> export_on
-        export_fig(sprintf(<span class="string">'%s%d.eps'</span>, filename, i), <span class="string">'-eps'</span>);
-        export_fig(sprintf(<span class="string">'%sC_%d.eps'</span>, filename, i),<span class="string">'-c[450,10,-310,10] '</span>,<span class="string">'-eps'</span>);
-        export_fig(sprintf(<span class="string">'%sE_%d.eps'</span>, filename, i),<span class="string">'-c[700,70,-10,750] '</span>,<span class="string">'-eps'</span>);
+<span class="comment">%         export_fig(sprintf('%s%d.eps', filename, i), '-eps');</span>
+        export_fig(sprintf(<span class="string">'%sC_%d.eps'</span>, filename, i),<span class="string">'-c[475,10,-310,10] '</span>,<span class="string">'-eps'</span>);
+        export_fig(sprintf(<span class="string">'%sE_%d.eps'</span>, filename, i),<span class="string">'-c[735,70,-10,750] '</span>,<span class="string">'-eps'</span>);
     <span class="keyword">end</span>
 </pre><pre class="codeinput"><span class="keyword">end</span>
 
     <span class="keyword">if</span> export_on
-        export_fig <span class="string">../Report/images/Exercise2c_A.eps</span> <span class="string">-c[30,10,-745,10]</span> <span class="string">-eps</span>;
-        export_fig <span class="string">../Report/images/Exercise2c_B.eps</span> <span class="string">-c[240,10,-542,10]</span> <span class="string">-eps</span>;
-        export_fig <span class="string">../Report/images/Exercise2c_D.eps</span> <span class="string">-c[700,820,-10,40]</span> <span class="string">-eps</span>;
+        export_fig <span class="string">../Report/images/Exercise2c_A.eps</span> <span class="string">-c[50,10,-745,10]</span> <span class="string">-eps</span>;
+        export_fig <span class="string">../Report/images/Exercise2c_B.eps</span> <span class="string">-c[265,10,-542,10]</span> <span class="string">-eps</span>;
+        export_fig <span class="string">../Report/images/Exercise2c_D.eps</span> <span class="string">-c[735,820,-10,40]</span> <span class="string">-eps</span>;
     <span class="keyword">end</span>
 </pre><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018a</a><br></p></div><!--
 ##### SOURCE BEGIN #####
-% ELEN3024 Lab 1 - Exercise 2c
-% Tyson Cross 1239448
-% Jason Parry 1046955
-% Rashaad Cassim 1099797
-
+%%% ELEN3024 Lab 1 - Exercise 2c / 3 / 4
+%{ 
+    Tyson Cross 1239448
+    Jason Parry 1046955
+    Rashaad Cassim 1099797
+%}
 clc; clear all; set(0,'ShowHiddenHandles','on'); delete(get(0,'Children'));
 interactive = 0;
 export_on = 0;
@@ -199,16 +200,16 @@ for i=3:-1:1
     export_fig(sprintf('plot%d.png', a));
     filename = ['../Report/images/Exercise2c_'];
     if export_on
-        export_fig(sprintf('%s%d.eps', filename, i), '-eps');
-        export_fig(sprintf('%sC_%d.eps', filename, i),'-c[450,10,-310,10] ','-eps');
-        export_fig(sprintf('%sE_%d.eps', filename, i),'-c[700,70,-10,750] ','-eps');
+%         export_fig(sprintf('%s%d.eps', filename, i), '-eps');
+        export_fig(sprintf('%sC_%d.eps', filename, i),'-c[475,10,-310,10] ','-eps');
+        export_fig(sprintf('%sE_%d.eps', filename, i),'-c[735,70,-10,750] ','-eps');
     end
 end
     
     if export_on
-        export_fig ../Report/images/Exercise2c_A.eps -c[30,10,-745,10] -eps;
-        export_fig ../Report/images/Exercise2c_B.eps -c[240,10,-542,10] -eps;
-        export_fig ../Report/images/Exercise2c_D.eps -c[700,820,-10,40] -eps;   
+        export_fig ../Report/images/Exercise2c_A.eps -c[50,10,-745,10] -eps;
+        export_fig ../Report/images/Exercise2c_B.eps -c[265,10,-542,10] -eps;
+        export_fig ../Report/images/Exercise2c_D.eps -c[735,820,-10,40] -eps;   
     end
 
 ##### SOURCE END #####
